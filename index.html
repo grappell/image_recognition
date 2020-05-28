@@ -35,12 +35,12 @@
     <script>
 
     if ('serviceWorker' in navigator) {
-        console.log("Will the service worker register?");
+        alert("Will the service worker register?");
         navigator.serviceWorker.register('serviceworker.js')
         .then(function(reg){
-            console.log("Yes, it did.");
+            alert("Yes, it did.");
         }).catch(function(err) {
-            console.log("No it didn't. This happened: ", err)
+            alert("No it didn't. This happened: ", err)
         });
     }
         alert('plese do not click anthing untill you get the message "startup finished"')
@@ -49,14 +49,16 @@
         async function start() {
                 loadedmodel = await cocoSsd.load()
                 if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                    navigator.mediaDevices.getUserMedia({ video: {facingMode: 'user'}, audio: true }).then(function(stream) {
+                    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(function(stream) {
                         //video.src = window.URL.createObjectURL(stream);
                         video.srcObject = stream;
                         video.play();
+                        alert("THERE IS A STREAM")
                     });
                 }
                     };
                 function buttonclicked() {
+                    alert("button clicked")
                     loadedmodel.detect(video).then(predictions => {
                         if (predictions.length == 0) {
                             document.getElementById("errorMessage").innerText = "Plese try again"
@@ -65,6 +67,7 @@
                             document.getElementById("errorMessage").innerText = ""
                         }
                         console.log(predictions)
+                        alert("stuff was perdicted")
                         document.getElementById("displayCatTxtPerdictions").innerText = "This is a " + predictions[0].class + "."
                         document.getElementById("displayCatNumPerdictions").innerText = "Confidence level: " + Math.ceil(predictions[0].score * 100) + "%"
                         console.log('Predictions: ', predictions);
