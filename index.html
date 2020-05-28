@@ -54,7 +54,7 @@
                         video.srcObject = stream;
                         video.play();
                         alert("THERE IS A STREAM")
-                    });
+                    }).catch(e => {alert(e)});
                 }
                     };
                 function buttonclicked() {
