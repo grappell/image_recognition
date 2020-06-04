@@ -53,16 +53,29 @@
         alert('plese do not click anthing untill you get the message "startup finished"')
         var video = document.getElementById('video');
         var loadedmodel; 
-        navigator.mediaDevices.enumerateDevices().then(devices => {console.log(devices)})
+        navigator.mediaDevices.enumerateDevices().then(devices => {
+            devices.filter(d => {
+                return(d.kind == 'videoinput')
+            }).forEach (d => {
+                var option = document.createElement('option');
+                option.innerText = d.label;
+                option.value = d.deviceId;
+                document.getElementById('cameraChoise').appendChild(option)
+            })
+            getVideo()
+        })
+        function getVideo() {
+                if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                    navigator.mediaDevices.getUserMedia({video: {deviceId: document.getElementById('cameraChoise').value}, audio: true }).then(function(stream) {
+                        //video.src = window.URL.createObjectURL(stream);
+                        video.srcObject = stream;
+                        video.play();
+                    }).catch(e => {alert(e)});
+                }
+        }
+        document.getElementById('cameraChoise').addEventListener('change', getVideo)
         async function start() {
                 loadedmodel = await cocoSsd.load()
-                //if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                    // navigator.mediaDevices.getUserMedia({ video: {facingMode: 'environment'}, audio: true }).then(function(stream) {
-                    //     //video.src = window.URL.createObjectURL(stream);
-                    //     video.srcObject = stream;
-                    //     video.play();
-                    // }).catch(e => {alert(e)});
-                //}
                     };
                 function buttonclicked() {
                     loadedmodel.detect(video).then(predictions => {
