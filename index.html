@@ -65,6 +65,12 @@
             getVideo()
         })
         function getVideo() {
+            if (window.stream) {
+              window.stream.getTracks().forEach(track => {
+                track.stop();
+            });
+        }
+
                 if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     navigator.mediaDevices.getUserMedia({video: {deviceId: document.getElementById('cameraChoise').value}, audio: true }).then(function(stream) {
                         //video.src = window.URL.createObjectURL(stream);
