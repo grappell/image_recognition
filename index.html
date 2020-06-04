@@ -26,6 +26,7 @@
     <link rel="manifest" href="manifest.json">
 </head>
 <body>
+    <select id="cameraChoise"></select>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>
     <h1 id="displayCatTxtPerdictions">  </h1>
@@ -39,7 +40,7 @@
     <button onclick="buttonclicked()">  START  </button>
     <h1 id="errorMessage"></h1>
     <script>
-
+        // cameraChoise
     if ('serviceWorker' in navigator) {
         //Will the service worker register?
         navigator.serviceWorker.register('serviceworker.js')
@@ -52,15 +53,16 @@
         alert('plese do not click anthing untill you get the message "startup finished"')
         var video = document.getElementById('video');
         var loadedmodel; 
+        navigator.mediaDevices.enumerateDevices().then(devices => {console.log(devices)})
         async function start() {
                 loadedmodel = await cocoSsd.load()
-                if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                    navigator.mediaDevices.getUserMedia({ video: {facingMode: 'environment'}, audio: true }).then(function(stream) {
-                        //video.src = window.URL.createObjectURL(stream);
-                        video.srcObject = stream;
-                        video.play();
-                    }).catch(e => {alert(e)});
-                }
+                //if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                    // navigator.mediaDevices.getUserMedia({ video: {facingMode: 'environment'}, audio: true }).then(function(stream) {
+                    //     //video.src = window.URL.createObjectURL(stream);
+                    //     video.srcObject = stream;
+                    //     video.play();
+                    // }).catch(e => {alert(e)});
+                //}
                     };
                 function buttonclicked() {
                     loadedmodel.detect(video).then(predictions => {
