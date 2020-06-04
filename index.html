@@ -37,7 +37,6 @@
         </div>
         <video id="video"></video>
     </div>
-    <button onclick="buttonclicked()">  START  </button>
     <h1 id="errorMessage"></h1>
     <script>
         // cameraChoise
@@ -83,6 +82,7 @@
         async function start() {
                 loadedmodel = await cocoSsd.load()
                     };
+                setInterval (buttonclicked, 1000)
                 function buttonclicked() {
                     loadedmodel.detect(video).then(predictions => {
                         if (predictions.length == 0) {
