@@ -91,7 +91,7 @@
                 function buttonclicked() {
                     loadedmodel.detect(video).then(predictions => {
                         if (predictions.length == 0) {
-                            document.getElementById("errorMessage").innerText = "Plese try again"
+                            document.getElementById("errorMessage").innerText = "Could not find an object, trying again"
                             return
                         } else {
                             document.getElementById("errorMessage").innerText = ""
