@@ -1,11 +1,11 @@
 {
   "name": "Image Reconition",
-  "short_name": "IMG",
+  "short_name": "Image Reconition",
   "theme_color": "#44844a",
   "background_color": "#ffffff",
   "display": "browser",
-  "Scope": "/",
-  "start_url": "/",
+  "Scope": "/image_recognition",
+  "start_url": "/image_recognition",
   "icons": [
     {
       "src": "images/icons/icon-72x72.png",
