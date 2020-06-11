@@ -3,7 +3,7 @@
   "short_name": "Image Reconition",
   "theme_color": "#44844a",
   "background_color": "#ffffff",
-  "display": "minimal-ui",
+  "display": "fullscreen",
   "orientation": "portrait",
   "Scope": "/image_recognition",
   "start_url": "/image_recognition",
